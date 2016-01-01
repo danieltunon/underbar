@@ -201,6 +201,13 @@
   // provided, provide a default one
   _.some = function(collection, iterator) {
     // TIP: There's a very clever way to re-use every() here.
+    var match = false;
+    _.each(collection, function(element, index, collection) {
+      if((iterator || _.identity)(element, index, collection)) {
+        match = true;
+      }
+    });
+    return match;
   };
 
 
