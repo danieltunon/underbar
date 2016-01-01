@@ -298,12 +298,14 @@
   _.memoize = function(func) {
     var alreadyCalled = false;
     var previousArguments = [];
+    var currentArguments;
     var result;
 
     return function() {
       // First will check if a previous call had the same arguments
-      // if any are different, assigns false to 'alreadyCalled' 
-      _.each(arguments, function(argument, index){
+      // if any are different, assigns false to 'alreadyCalled'
+      currentArguments = Array.prototype.slice.apply(arguments, [0]);
+      _.each(currentArguments, function(argument, index){
         if(argument !== previousArguments[index]) {
           alreadyCalled = false;
         }
@@ -314,7 +316,7 @@
       // If it hasn't: calls function with new arguments and resets variables.
       if (!alreadyCalled) {
         result = func.apply(this, arguments);
-        previousArguments = Array.prototype.slice.apply(arguments, [0]);
+        previousArguments = currentArguments.slice(0);
         alreadyCalled = true;
       }
       return result;
