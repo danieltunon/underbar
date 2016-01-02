@@ -304,7 +304,7 @@
     return function() {
       // First will check if a previous call had the same arguments
       // if any are different, assigns false to 'alreadyCalled'
-      currentArguments = Array.prototype.slice.apply(arguments, [0]);
+      currentArguments = Array.prototype.slice.call(arguments, 0);
       _.each(currentArguments, function(argument, index){
         if(argument !== previousArguments[index]) {
           alreadyCalled = false;
@@ -330,6 +330,10 @@
   // parameter. For example _.delay(someFunction, 500, 'a', 'b') will
   // call someFunction('a', 'b') after 500ms
   _.delay = function(func, wait) {
+    var passedArguments = Array.prototype.slice.call(arguments, 2);
+    return setTimeout(function(){
+      func.apply(this, passedArguments);
+    }, wait);
   };
 
 
