@@ -113,8 +113,8 @@
     // like each(), but in addition to running the operation on all
     // the members, it also maintains an array of results.
     var mappedResults = [];
-    _.each(collection, function(element, index, collection) {
-      mappedResults.push(iterator(element, index, collection));
+    _.each(collection, function(item, index, collection) {
+      mappedResults.push( iterator(item, index, collection) );
     });
     return mappedResults;
   };
