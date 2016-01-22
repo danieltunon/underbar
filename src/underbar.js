@@ -38,11 +38,7 @@
   // Like first, but for the last elements. If n is undefined, return just the
   // last element.
   _.last = function(array, n) {
-    if(n === 0) {
-      return []
-    } else {
-      return n === undefined ? array[array.length-1] : array.slice(-n);
-    } 
+    return n === undefined ? array[array.length - 1] : n === 0 ? [] : array.slice(-n);
   };
 
   // Call iterator(value, key, collection) for each element of collection.
@@ -57,9 +53,9 @@
       }
     } else {
       for(var key in collection) {
-        iterator(collection[key], key, collection); 
-      } 
-    } 
+        iterator(collection[key], key, collection);
+      }
+    }
   };
 
   // Returns the index at which value can be found in the array, or -1 if value
@@ -81,7 +77,7 @@
 
   // Return all elements of an array that pass a truth test.
   _.filter = function(collection, test) {
-    var 
+    var
     filteredElements = [];
     _.each(collection, function(element, index, collection) {
       if(test(element, index, collection)) {
@@ -310,8 +306,8 @@
           alreadyCalled = false;
         }
       });
-      // Checks whether or not the function has already been called 
-      // with the exact same set of arguments. 
+      // Checks whether or not the function has already been called
+      // with the exact same set of arguments.
       // If it has: skips repeat function call, returns previous result.
       // If it hasn't: calls function with new arguments and resets variables.
       if (!alreadyCalled) {
