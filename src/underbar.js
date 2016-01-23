@@ -226,8 +226,15 @@
   // Like extend, but doesn't ever overwrite a key that already
   // exists in obj
   _.defaults = function(obj) {
+    _.each( Array.prototype.slice.call( arguments, 1 ), function ( v ) {
+      _.each( v, function ( v, k ) {
+        if ( ! obj.hasOwnProperty( k ) ) {
+          obj[k] = v;
+        }
+      });
+    });
+    return obj;
   };
-
 
   /**
    * FUNCTIONS
