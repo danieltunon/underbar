@@ -276,30 +276,17 @@
   // already computed the result for the given argument and return that value
   // instead if possible.
   _.memoize = function(func) {
-    var alreadyCalled = false;
-    var previousArguments = [];
-    var currentArguments;
-    var result;
+    var resultsCache = {};
+    var cached = false;
+    var args;
 
     return function() {
-      // First will check if a previous call had the same arguments
-      // if any are different, assigns false to 'alreadyCalled'
-      currentArguments = Array.prototype.slice.call(arguments, 0);
-      _.each(currentArguments, function(argument, index){
-        if(argument !== previousArguments[index]) {
-          alreadyCalled = false;
-        }
-      });
-      // Checks whether or not the function has already been called
-      // with the exact same set of arguments.
-      // If it has: skips repeat function call, returns previous result.
-      // If it hasn't: calls function with new arguments and resets variables.
-      if (!alreadyCalled) {
-        result = func.apply(this, arguments);
-        previousArguments = currentArguments.slice(0);
-        alreadyCalled = true;
+      args = Array.prototype.slice.call(arguments).toString();
+      cached = resultsCache.hasOwnProperty(args);
+      if ( !cached ) {
+        resultsCache[args] = func.apply(this, arguments);
       }
-      return result;
+      return resultsCache[args];
     };
   };
 
