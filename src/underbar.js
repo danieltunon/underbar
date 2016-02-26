@@ -181,8 +181,8 @@
   _.every = function(collection, iterator ) {
     // TIP: Try re-using reduce() here.
     return _.reduce( collection, function( passed, item ) {
-        return passed &&
-          Boolean( iterator === undefined ? _.identity( item ) : iterator( item ) );
+      return passed &&
+        Boolean( iterator === undefined ? _.identity( item ) : iterator( item ) );
     }, true);
   };
 
