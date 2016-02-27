@@ -436,5 +436,16 @@
   //
   // Note: This is difficult! It may take a while to implement.
   _.throttle = function(func, wait) {
+    var isThrottled = false;
+
+    return function() {
+      if ( !isThrottled ) {
+        func.apply(this, arguments);
+        isThrottled = true;
+        setTimeout(function(){
+          isThrottled = false;
+        }, wait);
+      }
+    };
   };
 }());
