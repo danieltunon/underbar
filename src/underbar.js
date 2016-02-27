@@ -277,13 +277,11 @@
   // instead if possible.
   _.memoize = function(func) {
     var resultsCache = {};
-    var cached = false;
     var args;
 
     return function() {
       args = Array.prototype.slice.call(arguments).toString();
-      cached = resultsCache.hasOwnProperty(args);
-      if ( !cached ) {
+      if ( !resultsCache[args] ) {
         resultsCache[args] = func.apply(this, arguments);
       }
       return resultsCache[args];
@@ -389,6 +387,7 @@
   // Takes an arbitrary number of arrays and produces an array that contains
   // every item shared between all the passed-in arrays.
   _.intersection = function() {
+
   };
 
   // Take the difference between one array and a number of other arrays.
