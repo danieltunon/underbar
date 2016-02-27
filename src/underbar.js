@@ -410,6 +410,24 @@
   // Take the difference between one array and a number of other arrays.
   // Only the elements present in just the first array will remain.
   _.difference = function(array) {
+    var results = [];
+    var itemsToKeep = {};
+
+    for ( var i = 0; i < arguments[0].length; i++ ) {
+      itemsToKeep[arguments[0][i]] = arguments[0][i];
+    }
+
+    _.each(Array.prototype.slice.call(arguments, 1), function(array) {
+      for ( var i = 0; i < array.length; i++ ) {
+        itemsToKeep.hasOwnProperty(array[i]) && ( delete itemsToKeep[array[i]] );
+      }
+    });
+
+    for ( var k in itemsToKeep ) {
+      results.push(itemsToKeep[k]);
+    }
+
+    return results;
   };
 
   // Returns a function, that, when invoked, will only be triggered at most once
