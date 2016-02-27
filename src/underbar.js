@@ -413,8 +413,8 @@
     var results = [];
     var itemsToKeep = {};
 
-    for ( var i = 0; i < arguments[0].length; i++ ) {
-      itemsToKeep[arguments[0][i]] = arguments[0][i];
+    for ( var i = 0; i < array.length; i++ ) {
+      itemsToKeep[array[i]] = array[i];
     }
 
     _.each(Array.prototype.slice.call(arguments, 1), function(array) {
